@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-EYZZ44XXW8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-EYZZ44XXW8');
+    </script> -->
+    <title>Sleep Patterns 2021</title>
+    <meta charset="utf-8" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript" src="helper.js"></script>
+    <script type="text/javascript" src="mainVis.js"></script>
+    <script type="text/javascript" src="cycleVis.js"></script>
+    <script type="text/javascript" src="cdcLineVis.js"></script>
+    <script type="text/javascript" src="riskVis.js"></script>
+    <script src="//unpkg.com/d3-radial-axis"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>💤</text></svg>">
+</head>
+
+<body style="text-align: center; background-color: #fbfbfb; ">
+  <svg height="500" width="1000" class="atusVis"></svg>
+  <svg height="500" width="1000" class="cycleVis"></svg>
+  <svg height="900" width="1100" class="mainVis"></svg>
+  <svg height="500" width="1000" class="riskVis"></svg>
+  <footer style="font-family: 'Rubik'; font-size: 15px;">
+    <!-- <p>Note: I don't condone this type of sleep schedule. <br/>
+      I am only able to sustain this (atrocious) habit because <br/> I am a student with fully remote (and recorded) lectures. 
+    </p> -->
+    <p >Built by <a target="_blank" href="https://les-huang.netlify.app/">Lesley</a> 🧙‍♂️</p>
+  </footer>
+  <script>
+    let PI = Math.PI;
+    let padding = 25;
+
+    let textColor = "#696969";
+    let blueArcColor = "#7389AE";
+    let allNighterColor = "#F4B266"; // orange
+    let backgroundColor = "#e8e8e8";
+    let darkGreyColor = "#282828";
+
+    const getDataAndDrawVis = async() => {
+      let data = await d3.csv("sleep.csv");
+      console.log(data);
+      drawCdcLineChart(".atusVis");
+      drawSleepCycleChart(".cycleVis");
+      drawRadialChart(".mainVis", data);
+      drawRiskFactorChart(".riskVis");
+    }
+
+    getDataAndDrawVis();
+  </script>
+</body>
+</html>
