@@ -48,7 +48,60 @@ function getAllNighters() {
     {"Month": 4, "Day": 2},
     {"Month": 4, "Day": 7},
     {"Month": 4, "Day": 9}, 
-    {"Month": 4, "Day": 14}
+    {"Month": 4, "Day": 14}, 
+    {"Month": 5, "Day": 24}
+  ];
+}
+
+function getWatchSleep() {
+  return [
+    {"Month": 2, "Day": 4},
+    {"Month": 3, "Day": 3},
+    {"Month": 3, "Day": 15},
+    {"Month": 3, "Day": 22},
+    {"Month": 3, "Day": 31},
+    {"Month": 4, "Day": 1},
+    {"Month": 4, "Day": 2},
+    {"Month": 4, "Day": 5},
+    {"Month": 4, "Day": 15},
+    {"Month": 4, "Day": 17},
+    {"Month": 4, "Day": 18},
+    {"Month": 4, "Day": 23},
+    {"Month": 5, "Day": 10},
+    {"Month": 5, "Day": 20},
+    {"Month": 5, "Day": 21},
+    {"Month": 5, "Day": 23}
+  ];
+}
+
+function getRevengeSleep() {
+  return [
+    {"Month": 1, "Day": 10},
+    {"Month": 1, "Day": 16},
+    {"Month": 1, "Day": 27},
+    {"Month": 1, "Day": 29},
+    {"Month": 2, "Day": 14},
+    {"Month": 2, "Day": 15},
+    {"Month": 2, "Day": 16},
+    {"Month": 3, "Day": 26},
+    {"Month": 3, "Day": 28},
+    {"Month": 4, "Day": 7}
+  ];
+}
+
+function getWorkSleep() {
+  return [
+    {"Month": 1, "Day": 25},
+    {"Month": 2, "Day": 22},
+    {"Month": 3, "Day": 8},
+    {"Month": 3, "Day": 16},
+    {"Month": 3, "Day": 17},
+    {"Month": 3, "Day": 19},
+    {"Month": 4, "Day": 2},
+    {"Month": 4, "Day": 14},
+    {"Month": 5, "Day": 8},
+    {"Month": 5, "Day": 23},
+    {"Month": 5, "Day": 24}
   ];
 }
 

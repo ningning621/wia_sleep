@@ -70,6 +70,37 @@ function drawRadialChart(svgClass, data) {
     .attr('transform', "translate(" + centerWidth + ", " + centerHeight + ")")
     .style('opacity', 0.65);
 
+  // draw all reason arcs
+  svg.selectAll('.allRArcs')
+    .data(getRevengeSleep())
+    .enter()
+    .append("path")
+    .attr("class", "revenge_arcs")
+    .attr('d', allNighterArc)
+    .attr('fill', greenColor)
+    .attr('transform', "translate(" + centerWidth + ", " + centerHeight + ")")
+    .style('opacity', 0);
+
+  svg.selectAll('.allWArcs')
+    .data(getWatchSleep())
+    .enter()
+    .append("path")
+    .attr("class", "watch_arcs")
+    .attr('d', allNighterArc)
+    .attr('fill', greenColor)
+    .attr('transform', "translate(" + centerWidth + ", " + centerHeight + ")")
+    .style('opacity', 0);
+
+  svg.selectAll('.allRArcs')
+    .data(getWorkSleep())
+    .enter()
+    .append("path")
+    .attr("class", "work_arcs")
+    .attr('d', allNighterArc)
+    .attr('fill', greenColor)
+    .attr('transform', "translate(" + centerWidth + ", " + centerHeight + ")")
+    .style('opacity', 0);
+
   // draw sleep arcs
   svg.selectAll('.allSleepArcs')
     .data(data)
@@ -137,16 +168,59 @@ function drawRadialChart(svgClass, data) {
   );
 
   let reasons = ["watching Netflix or Youtube", "finishing work or studying", "committing revenge bedtime procrastination", "reset"];
-
+  let reasonCode = {
+    "watching Netflix or Youtube": "watch", 
+    "finishing work or studying": "work", 
+    "committing revenge bedtime procrastination": "revenge", 
+    "reset": "reset"};
+  // add reason buttons
   let count_r = 0;
   for (var r of reasons) {
     svg.append("circle")
+      .attr("class", "reason_button")
       .attr("cx", padding*1.25)
       .attr("cy", 400+30*count_r)
       .attr("r", 7)
+      .attr("reason", reasonCode[r])
       .style("fill", "#fbfbfb")
       .style("stroke", darkGreyColor)
-      .style("stroke-width", 2);
+      .style("stroke-width", 2)
+      .style("cursor", "pointer")
+      .on("click", function() {
+        // hide old selection
+        d3.selectAll(".revenge_arcs")
+          .transition()
+          .duration(500)
+          .style("opacity", 0);
+        d3.selectAll(".work_arcs")
+          .transition()
+          .duration(500)
+          .style("opacity", 0);
+        d3.selectAll(".watch_arcs")
+          .transition()
+          .duration(500)
+          .style("opacity", 0);
+        d3.selectAll(".reason_button")
+          .transition()
+          .duration(500)
+          .style("fill", "#fbfbfb");
+
+        let reason = d3.select(this).attr("reason");
+        
+        if (reason != "reset") {
+          // choose new selection
+          d3.selectAll("." + reason + "_arcs")
+            .transition()
+            .duration(700)
+            .style("opacity", 0.7);
+
+          // change button color
+          d3.select(this).transition()
+            .duration(700)
+            .style("fill", greenColor)
+            .style("opacity", 0.7);
+        }
+      });
     svg.append("text")
       .attr("x", padding*1.25 + 15)
       .attr("y", 400+30*count_r)
@@ -156,7 +230,7 @@ function drawRadialChart(svgClass, data) {
       .style("font-size", 16)
       .style("fill", textColor);
 
-    count_r++
+    count_r++;
   }
 
   // add legend
