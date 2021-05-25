@@ -101,8 +101,6 @@ function addBodyText(svg, x, y, textColor, textLst) {
       .attr("x", x)
       .attr("y", y+20*counter)
       .text(text)
-      // .attr("transform", "translate(-2.5, -2.5)")
-      // .style("font-family", "Rubik")
       .style("font-family", "Proza Libre")
       .style("text-anchor", "left")
       .style("font-size", 16)

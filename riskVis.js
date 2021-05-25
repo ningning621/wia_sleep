@@ -36,7 +36,13 @@ function drawRiskFactorChart(svgClass) {
       return y(0)-y(data[d][0]);
     })
     .attr("rx", 3)
-    .style("fill", allNighterColor);
+    .style("fill", allNighterColor)
+    .on("mouseover", function(d) {
+      d3.select("#" + d.replace(/\s+/g, '')).style("opacity", 1);
+    })
+    .on("mouseout", function(d) {
+      d3.select("#" + d.replace(/\s+/g, '')).style("opacity", 0);
+    });
 
   // sufficient sleep data
   svg.selectAll("#sufficient")
@@ -50,7 +56,27 @@ function drawRiskFactorChart(svgClass) {
       return y(0)-y(data[d][1]);
     })
     .attr("rx", 3)
-    .style("fill", blueArcColor);
+    .style("fill", blueArcColor)
+    .on("mouseover", function(d) {
+      d3.select("#" + d.replace(/\s+/g, '')).style("opacity", 1);
+    })
+    .on("mouseout", function(d) {
+      d3.select("#" + d.replace(/\s+/g, '')).style("opacity", 0);
+    });
+
+  svg.selectAll("#risk_text")
+    .data(Object.keys(data))
+    .enter()
+    .append("text")
+    .attr("id", d => d.replace(/\s+/g, ''))
+    .attr("x", d => (x(d) + x.bandwidth()/3))
+    .attr("y", d => (y(data[d][0]) - 10))
+    .text(d => "+" + (data[d][0] - data[d][1]).toFixed(2) + "%")
+    .style("font-family", "Rubik")
+    .style("text-anchor", "middle")
+    .style("font-weight", "bold")
+    .style("font-size", 14)
+    .style("opacity", 0);
 
   // add x-axis
   svg.append("g")
