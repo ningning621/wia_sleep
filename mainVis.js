@@ -116,22 +116,6 @@ function drawRadialChart(svgClass, data) {
         if (axisScale(d) < Math.PI) return "start";
         else return "end";
       });
-
-  // add title
-  // addTitleText(svg, 25, 100, darkGreyColor, ["Sleep Patterns from", "Jan 2021 - April 2021"]);
-  // addBodyText(svg, 25, 200, textColor, 
-  //   [
-  //     "I have been recording my sleep schedule",
-  //     "every day in a bullet journal and visualizing",
-  //     "that data leads to some interesting patterns."
-  //   ]);
-
-  // addBodyText(svg, 25, 300, textColor, 
-  //   [
-  //     "Although I sleep at strange times,",
-  //     "I do get on average 6.84 hours of sleep",
-  //     "per day."
-  //   ]);
   
   addBodyText(svg, 10, 100, textColor, [
     "As a college student with an irregular sleep schedule,",
@@ -152,6 +136,28 @@ function drawRadialChart(svgClass, data) {
   ]
   );
 
+  let reasons = ["watching Netflix or Youtube", "finishing work or studying", "committing revenge bedtime procrastination", "reset"];
+
+  let count_r = 0;
+  for (var r of reasons) {
+    svg.append("circle")
+      .attr("cx", padding*1.25)
+      .attr("cy", 400+30*count_r)
+      .attr("r", 7)
+      .style("fill", "#fbfbfb")
+      .style("stroke", darkGreyColor)
+      .style("stroke-width", 2);
+    svg.append("text")
+      .attr("x", padding*1.25 + 15)
+      .attr("y", 400+30*count_r)
+      .text(r)
+      .style("alignment-baseline", "middle")
+      .style("font-family", "Proza Libre")
+      .style("font-size", 16)
+      .style("fill", textColor);
+
+    count_r++
+  }
 
   // add legend
   svg.append('path')
