@@ -22,7 +22,7 @@ function drawRiskFactorChart(svgClass) {
     .range([padding*4, svgWidth - padding*4])
   let y = d3.scaleLinear()
     .domain([0, 30])
-    .range([svgHeight-padding*4, padding*4]);
+    .range([svgHeight-padding*4, padding*6]);
 
   // short of sleep data
   svg.selectAll("#short")
@@ -69,38 +69,67 @@ function drawRiskFactorChart(svgClass) {
     .style("font-size", 14)
     .call(d3.axisLeft(y).tickFormat(d => d + "%").ticks(8))
     .call(g => g.select(".domain").remove())
+  svg.append("text")
+    .attr("x", -1*((svgHeight-padding*4 + padding*6)*0.5))
+    .attr("y", padding)
+    .attr("text-anchor", "middle")
+    .attr("transform", "rotate(-90)")
+    .text("Risk Percentage")
+    .style("font-family", "Rubik")
+    .style("font-weight", "bold")
+    .style("font-size", 14);
     
   // add legend 
   svg.append("rect")
     .attr("x", svgWidth*0.825)
-    .attr("y", svgHeight*0.2 - padding)
+    .attr("y", svgHeight*0.3 - padding)
     .attr("width", padding*0.75)
     .attr("height", padding*0.75)
     .attr("rx", 3)
     .style("fill", allNighterColor);
   svg.append("rect")
     .attr("x", svgWidth*0.825)
-    .attr("y", svgHeight*0.2)
+    .attr("y", svgHeight*0.3)
     .attr("width", padding*0.75)
     .attr("height", padding*0.75)
     .attr("rx", 3)
     .style("fill", blueArcColor);
   svg.append("text")
     .attr("x", svgWidth*0.825 + padding)
-    .attr("y", svgHeight*0.2 - padding/2)
+    .attr("y", svgHeight*0.3 - padding/2)
     .text("short sleep (< 7h)")
     .style("alignment-baseline", "middle")
     .style("font-family", "Rubik")
     .style("font-size", 14);
   svg.append("text")
     .attr("x", svgWidth*0.825 + padding)
-    .attr("y", svgHeight*0.2 +padding/2)
+    .attr("y", svgHeight*0.3 +padding/2)
     .text("sufficient sleep (> 7h)")
     .style("alignment-baseline", "middle")
     .style("font-family", "Rubik")
     .style("font-size", 14);
-  
 
+  addBodyText(svg, 10, padding, textColor, [
+    "Following good sleep hygiene is important as there are associated health risks for",
+    "getting \"short sleep\" (less than 7 hours per night), as presented by the CDC (2). "
+  ]);
+
+  addBodyText(svg, 10, svgHeight+padding, textColor, [
+    "To improve sleep hygiene and avoid these health risks, it is recommended to prioritize sleep",
+    "sleep (which I am working on!), keep a consistent routine, and budget time for winding down",
+    "in the absence of electronics. (4)"
+  ]);
+
+  // add title for line chart
+  svg.append("text")
+    .attr("x", (padding*4 + svgWidth - padding*4)*0.5)
+    .attr("y", 100)
+    .attr("text-anchor", "middle")
+    // .attr("transform", "rotate(-90)")
+    .text("Risk Factors Associated with Sleep")
+    .style("font-family", "Rubik")
+    .style("font-weight", "bold")
+    .style("font-size", 18);
 }
 
 /* used for wrapping text in bar graph axes labels */

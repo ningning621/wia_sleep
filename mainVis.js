@@ -132,6 +132,26 @@ function drawRadialChart(svgClass, data) {
   //     "I do get on average 6.84 hours of sleep",
   //     "per day."
   //   ]);
+  
+  addBodyText(svg, 10, 100, textColor, [
+    "As a college student with an irregular sleep schedule,",
+    "I was curious to see how my sleep compares to the",
+    "known patterns above. In general, I seem to follow",
+    "the biphasic cycle with sleeping times shifting slowly",
+    "clockwise, from midnight to 6:00am."]
+  );
+
+  addBodyText(svg, 10, 250, textColor, [
+    "Despite the irregularity, I sleep on average 6.93 hours",
+    "per night, close to the CDC recommended length."]
+  );
+
+  addBodyText(svg, 10, 350, textColor, [
+    "With the filters below, explore the common",
+    "reasons for why I may delay sleep times: "
+  ]
+  );
+
 
   // add legend
   svg.append('path')

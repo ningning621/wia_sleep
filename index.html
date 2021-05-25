@@ -10,7 +10,7 @@
 
       gtag('config', 'G-EYZZ44XXW8');
     </script> -->
-    <title>Sleep Patterns 2021</title>
+    <title>Sleep Hygiene</title>
     <meta charset="utf-8" />
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script type="text/javascript" src="helper.js"></script>
@@ -26,14 +26,22 @@
 </head>
 
 <body style="text-align: center; background-color: #fbfbfb; ">
+  <h2 style="font-family: 'Proza Libre'; padding-top: 50px; font-size: 40px;">Sleep Hygiene: An Intimate View</h2>
   <svg height="500" width="1000" class="atusVis"></svg>
-  <svg height="500" width="1000" class="cycleVis"></svg>
-  <svg height="900" width="1100" class="mainVis"></svg>
-  <svg height="500" width="1000" class="riskVis"></svg>
+  <svg height="500" width="1000" style="margin-top: 45px;" class="cycleVis"></svg>
+  <svg height="875" width="1100" class="mainVis"></svg>
+  <svg height="600" width="1000" class="riskVis"></svg>
+  <!-- <svg height="300" width="1000" class="hygieneVis"></svg> -->
   <footer style="font-family: 'Rubik'; font-size: 15px;">
     <!-- <p>Note: I don't condone this type of sleep schedule. <br/>
       I am only able to sustain this (atrocious) habit because <br/> I am a student with fully remote (and recorded) lectures. 
     </p> -->
+    <p>data: 
+      <a target="_blank" href="https://data.bls.gov/timeseries/TUU10101AA01000247">(1)</a> 
+      <a target="_blank" href="https://www.cdc.gov/sleep/data_statistics.html">(2)</a>
+      <a target="_blank" href="https://www.dreams.co.uk/sleep-matters-club/4-alternative-sleeping-cycles-infographic/">(3)</a>
+      <a target="_blank" href="https://www.sleepfoundation.org/sleep-hygiene">(4)</a>
+    </p>
     <p >Built by <a target="_blank" href="https://les-huang.netlify.app/">Lesley</a> 🧙‍♂️</p>
   </footer>
   <script>
@@ -53,6 +61,7 @@
       drawSleepCycleChart(".cycleVis");
       drawRadialChart(".mainVis", data);
       drawRiskFactorChart(".riskVis");
+      // drawHygieneChart(".hygieneVis")
     }
 
     getDataAndDrawVis();

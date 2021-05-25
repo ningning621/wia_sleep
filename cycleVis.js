@@ -53,6 +53,12 @@ function drawSleepCycleChart(svgClass) {
   let cycles = ["monophasic", "biphasic", "everyman", "dymaxion", "uberman"];
   let hours = ["8 hours", "7.5 hours", "4.5 hours", "2 hours", "2 hours"];
   let count = 0;
+
+  // draw x-axis
+  let axisScale = d3.scaleLinear()
+    .domain([0, 24])
+    .range([0, 2*Math.PI]);
+  
   for (var i = (circleSpacing + circleSize*0.5); i < svgWidth; i = i+(circleSize+circleSpacing*2)) {
     // add background circle 
     svg.append("path")
@@ -61,7 +67,7 @@ function drawSleepCycleChart(svgClass) {
         .outerRadius(circleSize*0.5) // hardcoded
         .startAngle(0)
         .endAngle(360 * PI / 180))
-      .attr('transform', "translate(" + i + ", " + (svgHeight*0.5) + ")")
+      .attr('transform', "translate(" + i + ", " + (svgHeight*0.6) + ")")
       .style("fill", backgroundColor);
     
     // draw arcs for sleep time
@@ -70,14 +76,14 @@ function drawSleepCycleChart(svgClass) {
       .enter()
       .append("path")
       .attr("d", arc)
-      .attr('transform', "translate(" + i + ", " + (svgHeight*0.5) + ")")
+      .attr('transform', "translate(" + i + ", " + (svgHeight*0.6) + ")")
       .style("fill", blueArcColor)
       .style("opacity", 0.8);
 
     // add title for sleep cycle
     svg.append("text")
       .attr("x", i)
-      .attr("y", (svgHeight - circleSize)*0.5 - padding*2)
+      .attr("y", (svgHeight - circleSize)*0.6 - padding*2)
       .text(cycles[count])
       .style("font-family", "Rubik")
       .style("text-anchor", "middle")
@@ -86,14 +92,47 @@ function drawSleepCycleChart(svgClass) {
       .style("font-size", 16);
     svg.append("text")
       .attr("x", i)
-      .attr("y", (svgHeight+ circleSize)*0.5 + padding*2)
+      .attr("y", (svgHeight+ circleSize)*0.6 + padding*2)
       .text(hours[count])
       .style("font-family", "Rubik")
       .style("text-anchor", "middle")
-      .style("font-weight", "bold")
+      // .style("font-weight", "bold")
       .style("text-transform", "uppercase")
       .style("font-size", 16);
+
+    // svg.append('g')
+    //   .call(d3.axisRadialOuter(
+    //     axisScale, 
+    //     circleSize*0.6)
+    //   .tickFormat("")
+    //   ).attr('transform', "translate(" + i + ", " + (svgHeight*0.6) + ")") 
+    //   .style("opacity", 0.6)
+    //   .selectAll("text")
+    //     .style("font-family", "Rubik")
+    //     .style("font-size", "12")
+    //     .attr("text-anchor", function(d) {
+    //       if (axisScale(d) < Math.PI) return "start";
+    //       else return "end";
+    //     });
     
     count++;
   }
+
+  //24 hr time label
+  svg.append("text")
+    .attr("x", 0)
+    .attr("y", svgHeight*0.75)
+    .text("24 hr time ")
+    .style("font-family", "Rubik")
+    .style("font-weight", "bold")
+    .style("font-size", 12)
+    .style("fill", textColor);
+  
+
+  addBodyText(svg, 10, padding, textColor, [
+    "Normally, when we think about sleep, we assume that people are following",
+    "a monophasic sleep cycle where they sleep in one large chuck of time.",
+    "However, there are other sleep cycles that take advantage of REM sleep",
+    "duration and provides flexibility in how someone can manage their sleep hours (3). "
+  ]);
 }

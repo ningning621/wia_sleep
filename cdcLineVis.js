@@ -24,7 +24,7 @@ function drawCdcLineChart(svgClass) {
     .range([svgWidth*0.5, svgWidth-100]);
 
   let y = d3.scaleLinear()
-  .domain([8.4, 8.9])
+  .domain([8.5, 8.9])
   .range([svgHeight-100, 100]);
 
   // line generator
@@ -55,6 +55,25 @@ function drawCdcLineChart(svgClass) {
     .call(g => g.select(".domain").remove())
     .style("font-family", "Rubik")
     .style("font-size", 14);
+  svg.append("text")
+    .attr("x", -1*(svgHeight*0.5))
+    .attr("y", svgWidth*0.5 - padding*2.5)
+    .attr("text-anchor", "middle")
+    .attr("transform", "rotate(-90)")
+    .text("Hours per night")
+    .style("font-family", "Rubik")
+    .style("font-weight", "bold")
+    .style("font-size", 14);
+  // add title for line chart
+  svg.append("text")
+    .attr("x", (svgWidth-100 + svgWidth*0.5)*0.5)
+    .attr("y", 75)
+    .attr("text-anchor", "middle")
+    // .attr("transform", "rotate(-90)")
+    .text("American Time Use Survey: Sleep")
+    .style("font-family", "Rubik")
+    .style("font-weight", "bold")
+    .style("font-size", 18);
 
   // overlay for mouseover
   let circle = svg.append("circle")
@@ -92,8 +111,23 @@ function drawCdcLineChart(svgClass) {
       circle.style("opacity", 0)
       circleText.style("opacity", 0);
     });
-  
 
+  addBodyText(svg, 10, 150, textColor, [
+    "Humans spend about a third of their lives",
+    "asleep, yet there is not much discussion on",
+    "sleep hygiene as well as the consequences",
+    "of insufficient sleep. "
+  ]);
+
+  addBodyText(svg, 10, 275, textColor, [ 
+    "According to the American Time Use Survey,",
+    "Americans are on average getting more minutes",
+    "of sleep per day per year. The most recent data",
+    "entry from 2019 shows that Americans are",
+    "sleeping on average 8.84 hours per night (1),",
+    "far exceeding the CDC recommended amount",
+    "of 7 hours (2)."
+  ]);
 }
 
 function getYearFromEvent(eventX, data) {
