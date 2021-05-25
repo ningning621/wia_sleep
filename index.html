@@ -53,12 +53,11 @@
 
     const getDataAndDrawVis = async() => {
       let data = await d3.csv("sleep.csv");
-      console.log(data);
+      // console.log(data);
       drawCdcLineChart(".atusVis");
       drawSleepCycleChart(".cycleVis");
       drawRadialChart(".mainVis", data);
       drawRiskFactorChart(".riskVis");
-      // drawHygieneChart(".hygieneVis")
     }
 
     getDataAndDrawVis();
